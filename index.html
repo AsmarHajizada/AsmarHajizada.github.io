@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Asmar Hajizada — Leading Data Scientist in Baku. Speech AI, NLP and RAG in production.">
+<title>Asmar Hajizada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: one narrow column of reading text on a dark ground; case studies as a vertical index, each a short brief with a "numbers" rail. Single dark theme by choice. */
+  :root {
+    --bg: #0f1114;
+    --bg-2: #15181d;
+    --line: #262b33;
+    --fg: #e6e4df;
+    --fg-2: #9a9c9f;
+    --fg-3: #65686d;
+    --accent: #d3a06a;
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+    --measure: 62ch;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .15s; }
+  a:hover { border-color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  /* top bar */
+  .top {
+    display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 24px;
+    padding-block: 28px 0;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-2);
+  }
+  .top nav { display: flex; gap: 20px; flex-wrap: wrap; }
+  .top a { border: 0; color: var(--fg-2); }
+  .top a:hover { color: var(--fg); }
+
+  /* hero */
+  .hero { padding-block: 72px 56px; }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 300; font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.02; letter-spacing: -.01em; margin: 0 0 20px; text-wrap: balance;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .lede { max-width: var(--measure); color: var(--fg-2); font-size: 18px; margin: 0 0 28px; }
+  .hero .lede strong { color: var(--fg); font-weight: 500; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--font-mono); font-size: 13px; color: var(--fg-2); }
+  .meta span b { color: var(--fg-3); font-weight: 400; margin-right: 8px; }
+
+  /* sections */
+  section { padding-block: 56px; border-top: 1px solid var(--line); }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 28px; }
+
+  /* case studies */
+  .case { display: grid; grid-template-columns: minmax(0, 1fr) 180px; gap: 24px 48px; padding-block: 36px; border-top: 1px solid var(--line); }
+  .case:first-of-type { border-top: 0; padding-top: 0; }
+  .case h2 { font-family: var(--font-display); font-weight: 500; font-size: 28px; line-height: 1.15; margin: 0 0 6px; text-wrap: balance; }
+  .case .where { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin: 0 0 16px; }
+  .case p { margin: 0 0 14px; max-width: var(--measure); color: var(--fg-2); }
+  .case p:last-child { margin-bottom: 0; }
+  .case p strong { color: var(--fg); font-weight: 500; }
+  .rail { display: flex; flex-direction: column; gap: 18px; padding-top: 6px; }
+  .rail div { border-top: 1px solid var(--line); padding-top: 8px; }
+  .rail .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-3); }
+  .rail .v { font-size: 15px; color: var(--fg); margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .rail .v small { color: var(--fg-2); font-size: 13px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .tags span { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); border: 1px solid var(--line); padding: 3px 8px; border-radius: 2px; }
+
+  /* experience */
+  .xp { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 32px; }
+  .xp .d { font-family: var(--font-mono); font-size: 13px; color: var(--fg-3); padding-top: 3px; font-variant-numeric: tabular-nums; }
+  .xp .r { padding-bottom: 20px; }
+  .xp .r b { font-weight: 500; display: block; }
+  .xp .r span { color: var(--fg-2); font-size: 15px; }
+
+  /* skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px 40px; }
+  .skills h3 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-3); font-weight: 400; margin: 0 0 10px; }
+  .skills ul { list-style: none; margin: 0; padding: 0; color: var(--fg-2); font-size: 15px; }
+  .skills li { padding-block: 2px; }
+
+  /* contact */
+  .contact p { max-width: var(--measure); color: var(--fg-2); margin: 0 0 24px; }
+  .mail { display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 15px; }
+  .mail code { background: var(--bg-2); border: 1px solid var(--line); padding: 8px 12px; border-radius: 2px; user-select: all; }
+  .mail button {
+    font: inherit; font-size: 13px; color: var(--fg); background: transparent; border: 1px solid var(--line); padding: 7px 12px; border-radius: 2px; cursor: pointer;
+  }
+  .mail button:hover { border-color: var(--accent); }
+  .links { margin-top: 24px; display: flex; gap: 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 13px; }
+
+  footer { padding-block: 32px 40px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 640px) {
+    .case { grid-template-columns: minmax(0, 1fr); }
+    .rail { flex-direction: row; flex-wrap: wrap; gap: 14px 24px; }
+    .rail div { flex: 1 1 120px; }
+    .xp { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .xp .d { padding-top: 0; }
+    .hero { padding-block: 48px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div>Asmar Hajizada</div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Production AI for a bank:<br><em>speech, language, retrieval.</em></h1>
+    <p class="lede">I'm a <strong>Leading Data Scientist at the International Bank of Azerbaijan</strong>. I take models from corpus and notebook to a service people use every day, including the Azerbaijani text-to-speech voice behind the bank's assistant.</p>
+    <div class="meta">
+      <span><b>Based</b>Baku, Azerbaijan</span>
+      <span><b>Focus</b>Speech AI · NLP · RAG</span>
+      <span><b>Since</b>2023 in production ML</span>
+    </div>
+  </div>
+
+  <section id="work">
+    <p class="eyebrow">Selected work</p>
+
+    <article class="case">
+      <div>
+        <h2>An Azerbaijani text-to-speech voice, from corpus to API</h2>
+        <p class="where">International Bank of Azerbaijan · 2024–2026</p>
+        <p>Azerbaijani has almost no public speech data, so the voice had to be built from the ground up. I generated a <strong>70+ hour synthetic corpus</strong> with Gemini voices across two speakers, then recorded and curated <strong>about five hours each from two in-house speakers</strong>. Training ran in two stages: fine-tune on the large synthetic set, then fine-tune that checkpoint on the real recordings.</p>
+        <p>The hard part was text, not audio. Banking text is full of abbreviations, product names and invented words (campaign names, card names) that no dictionary covers, so I built the normalization layer that turns them into something a model can say correctly.</p>
+        <p>I trained and compared small VITS, F5-TTS and Piper models, then wrote the benchmark suite that certified the winner for production: latency, time to first byte, real-time factor, audio duration, success rate and behaviour under concurrent load. The result ships as an API inside the bank's assistant and runs on CPU or GPU.</p>
+        <div class="tags"><span>VITS</span><span>F5-TTS</span><span>Piper</span><span>PyTorch</span><span>ONNX</span><span>Docker</span></div>
+      </div>
+      <aside class="rail">
+        <div><div class="k">Latency</div><div class="v">&lt; 0.2 s</div></div>
+        <div><div class="k">Training data</div><div class="v">70+ h synthetic <small>+ ~10 h real</small></div></div>
+        <div><div class="k">Serving</div><div class="v">CPU or GPU, concurrent requests</div></div>
+        <div><div class="k">Models compared</div><div class="v">3</div></div>
+      </aside>
+    </article>
+
+    <article class="case">
+      <div>
+        <h2>Virtual assistants that answer, and then act</h2>
+        <p class="where">International Bank of Azerbaijan · 2023–present</p>
+        <p>I own the AI layer of the bank's assistants: the <strong>customer-facing assistant</strong>, <strong>internal chatbots</strong> for employees, and an <strong>SQL assistant</strong> that turns questions into queries. They answer from documents, and they also do things: I implemented action flows such as opening a support ticket directly from the conversation, for both customers and staff.</p>
+        <p>Plain vector retrieval broke once the assistant had too many routes and dimensions to choose between. I redesigned it as a <strong>graph-based RAG workflow</strong> in LangGraph, where retrieval, routing and tool calls are explicit nodes, backed by LangChain and a Milvus vector store with cloud LLM APIs behind it.</p>
+        <p>Quality is measured, not assumed: every change is scored against a labeled evaluation set and reviewed by people before it reaches users.</p>
+        <div class="tags"><span>LangGraph</span><span>LangChain</span><span>Milvus</span><span>RAG</span><span>Evaluation</span><span>SQL</span></div>
+      </div>
+      <aside class="rail">
+        <div><div class="k">Surfaces</div><div class="v">Customer · Internal · SQL</div></div>
+        <div><div class="k">Retrieval</div><div class="v">Graph-based RAG</div></div>
+        <div><div class="k">Evaluation</div><div class="v">Labeled set + human review</div></div>
+      </aside>
+    </article>
+
+    <article class="case">
+      <div>
+        <h2>Computer vision and TTS groundwork</h2>
+        <p class="where">PRODATA · 2023</p>
+        <p>Built deep-learning solutions for <strong>object detection, object counting and face recognition</strong>, containerized them with Docker and exposed them as model APIs. Wrote a text-normalization pipeline for a text-to-speech system, the first version of the problem I later solved properly for Azerbaijani, and contributed to image and video compression research.</p>
+        <div class="tags"><span>OpenCV</span><span>Object detection</span><span>Face recognition</span><span>Docker</span></div>
+      </div>
+      <aside class="rail">
+        <div><div class="k">Domain</div><div class="v">Vision · Speech</div></div>
+      </aside>
+    </article>
+
+    <article class="case">
+      <div>
+        <h2>Teaching generative AI</h2>
+        <p class="where">UNEC, Azerbaijan State University of Economics</p>
+        <p>Designed and delivered an <strong>eight-lesson Generative AI course</strong> to computer science students over two months, in partnership with the bank: how language models work, prompting, retrieval, and what it takes to ship them. I also give AI product demos and write the technical documentation that business and engineering teams work from.</p>
+        <div class="tags"><span>8 lessons</span><span>LLMs</span><span>RAG</span><span>Documentation</span></div>
+      </div>
+      <aside class="rail">
+        <div><div class="k">Format</div><div class="v">8 lessons · 2 months</div></div>
+      </aside>
+    </article>
+  </section>
+
+  <section id="experience">
+    <p class="eyebrow">Experience</p>
+    <div class="xp">
+      <div class="d">Apr 2026 – now</div><div class="r"><b>Leading Data Scientist</b><span>International Bank of Azerbaijan</span></div>
+      <div class="d">Aug 2024 – Apr 2026</div><div class="r"><b>Data Scientist</b><span>International Bank of Azerbaijan</span></div>
+      <div class="d">Nov 2023 – Aug 2024</div><div class="r"><b>Junior Data Scientist</b><span>International Bank of Azerbaijan</span></div>
+      <div class="d">May – Nov 2023</div><div class="r"><b>Junior Data Scientist</b><span>PRODATA</span></div>
+      <div class="d">2022 – 2023</div><div class="r"><b>Cyber risk and security roles</b><span>PROSOL · SOCAR · Caspian Innovation Center</span></div>
+      <div class="d">2019 – 2024</div><div class="r"><b>B.Sc. Information Security</b><span>Baku Higher Oil School · Presidential Scholarship, highest entrance result among Group I students</span></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="eyebrow">Skills</p>
+    <div class="skills">
+      <div><h3>Speech</h3><ul><li>TTS fine-tuning and deployment</li><li>Corpus building and curation</li><li>Text normalization</li><li>Wake-word, speaker ID, VAD</li><li>Load and latency benchmarking</li></ul></div>
+      <div><h3>Language and retrieval</h3><ul><li>RAG and graph-based workflows</li><li>LangChain, LangGraph</li><li>Embeddings, Milvus</li><li>Prompt engineering</li><li>Evaluation design</li></ul></div>
+      <div><h3>Engineering</h3><ul><li>Python, SQL, C, C++</li><li>PyTorch, scikit-learn</li><li>OpenCV</li><li>Docker, Linux, Git</li><li>Postman, LaTeX</li></ul></div>
+      <div><h3>Languages</h3><ul><li>Azerbaijani, native</li><li>English, IELTS 8.0</li><li>Turkish</li><li>Russian, elementary</li></ul></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <p class="eyebrow">Contact</p>
+    <p>Open to conversations about speech and language systems in production, in Baku or remote.</p>
+    <div class="mail">
+      <code id="email">asmarhajizada@gmail.com</code>
+      <button type="button" id="copy">Copy</button>
+    </div>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/asmar-hajizada/">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Asmar Hajizada</span>
+    <span>Baku, 2026</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('copy');
+    var email = document.getElementById('email');
+    btn.addEventListener('click', function () {
+      var text = email.textContent;
+      function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); }
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(email);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else fallback();
+    });
+  })();
+</script>
+</body>
+</html>
