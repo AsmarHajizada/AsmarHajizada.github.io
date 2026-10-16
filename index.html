@@ -75,6 +75,8 @@
   .case p { margin: 0 0 14px; max-width: var(--measure); color: var(--fg-2); }
   .case p:last-child { margin-bottom: 0; }
   .case p strong { color: var(--fg); font-weight: 500; }
+  .case p code { font-family: var(--font-mono); font-size: 14px; color: var(--fg); }
+  .case .where a { color: var(--fg-2); }
   .rail { display: flex; flex-direction: column; gap: 18px; padding-top: 6px; }
   .rail div { border-top: 1px solid var(--line); padding-top: 8px; }
   .rail .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-3); }
@@ -179,6 +181,23 @@
 
     <article class="case">
       <div>
+        <h2>CV Evaluator: requirement-by-requirement CV matching with cited evidence</h2>
+        <p class="where">Open source · 2026 · <a href="https://github.com/AsmarHajizada/cv-evaluator">github.com/AsmarHajizada/cv-evaluator</a></p>
+        <p>A tool that checks a CV against a job description and marks each requirement as <strong>supported, partial or missing</strong>, citing the CV passages it used as evidence. It also rates the writing, suggests rewrites, and lists the five changes most likely to help.</p>
+        <p>The pipeline parses the CV with Docling into numbered, section-tagged passages, extracts must-have and nice-to-have requirements from the posting with an LLM, matches each one against the passages, and scores the result (must-haves weighted double). Every LLM step validates its own output: a citation to a passage that doesn't exist, a skipped requirement, or a number invented in a rewrite is caught and sent back for a retry. Job postings can be pasted or fetched from a URL via schema.org <code>JobPosting</code> data.</p>
+        <p>Python backend with FastAPI, PydanticAI and a CLI; Next.js front end; offline tests with a scripted model. Next step is a compact fine-tuned matcher, evaluated against a frontier LLM on agreement with human reviewers, consistency, latency and cost.</p>
+        <div class="tags"><span>PydanticAI</span><span>FastAPI</span><span>Docling</span><span>Next.js</span><span>LLM evaluation</span><span>Python</span></div>
+      </div>
+      <aside class="rail">
+        <div><div class="k">Input</div><div class="v">PDF, DOCX, MD, HTML, text</div></div>
+        <div><div class="k">Output</div><div class="v">Per-requirement verdict + cited passages</div></div>
+        <div><div class="k">Parsing</div><div class="v">&lt; 1 s per CV <small>after first run</small></div></div>
+        <div><div class="k">Model</div><div class="v">Any PydanticAI model string</div></div>
+      </aside>
+    </article>
+
+    <article class="case">
+      <div>
         <h2>Computer vision and TTS groundwork</h2>
         <p class="where">PRODATA · 2023</p>
         <p>Built deep-learning solutions for <strong>object detection, object counting and face recognition</strong>, containerized them with Docker and exposed them as model APIs. Wrote a text-normalization pipeline for a text-to-speech system, the first version of the problem I later solved properly for Azerbaijani, and contributed to image and video compression research.</p>
@@ -233,6 +252,7 @@
     </div>
     <div class="links">
       <a href="https://www.linkedin.com/in/asmar-hajizada/">LinkedIn</a>
+      <a href="https://github.com/AsmarHajizada">GitHub</a>
     </div>
   </section>
 
